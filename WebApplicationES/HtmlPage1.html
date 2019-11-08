@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html ng-app="App">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var app = angular.module("App", []).controller("MyCtrl", function ($scope, $http) {
+            $scope.Try = function (_emapDetails) {
+                $scope._emapDetails = {}
+                $http({
+                    method: "POST",
+                    url: "/Home/Index",
+                    data: _emapDetails,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                $scope.SS = true;
+            }
+
+        })
+    </script>
+</head>
+<body ng-controller="MyCtrl">
+    <form>
+        <div>
+            <div>
+                TO:
+                <input type="text" ng-model="_emapDetails.To1" />
+            </div>
+            <div>
+                Subject:
+                <input type="text" ng-model="_emapDetails.Subject" />
+            </div>
+            <div>
+                Body:
+                <input type="text" ng-model="_emapDetails.Body" />
+            </div>
+            <div>
+                <button ng-click="Try(_emapDetails)">Submit</button>
+            </div>
+            <div>
+                <span ng-show="SS" style="color:green">Send Your Email Successfully</span>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
